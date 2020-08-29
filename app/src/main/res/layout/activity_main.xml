@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="4"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:layout_rowWeight="2"
+        android:layout_columnSpan="4"
+        android:layout_columnWeight="1"
+    >
+        <TextView
+            android:id="@+id/main_operationTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="4+5"
+            android:textSize="30sp"
+            />
+        <TextView
+            android:id="@+id/main_displayTextView"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="60sp"
+            android:gravity="right|center"
+            android:text="0" />
+
+    </FrameLayout>
+        <Button
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:autoSizeTextType="uniform"
+        android:onClick="numberInputGotClicked"
+        android:text="7" />
+
+    <Button
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:autoSizeTextType="uniform"
+        android:onClick="numberInputGotClicked"
+        android:text="8" />
+
+    <Button
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:autoSizeTextType="uniform"
+        android:onClick="numberInputGotClicked"
+        android:text="9" />
+
+    <Button
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:autoSizeTextType="uniform"
+        android:onClick="resetButtonGotClicked"
+        android:text="C" />
+
+    <Button
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:autoSizeTextType="uniform"
+        android:onClick="numberInputGotClicked"
+        android:text="4" />
+
+    <Button
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:autoSizeTextType="uniform"
+        android:onClick="numberInputGotClicked"
+        android:text="5" />
+
+    <Button
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:autoSizeTextType="uniform"
+        android:onClick="numberInputGotClicked"
+        android:text="6" />
+
+    <Button
+        android:layout_rowSpan="1"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:autoSizeTextType="uniform"
+        android:onClick="operatorsClicked"
+        android:text="÷" />
+
+    <Button
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:autoSizeTextType="uniform"
+        android:onClick="numberInputGotClicked"
+        android:text="1" />
+
+    <Button
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:autoSizeTextType="uniform"
+        android:onClick="numberInputGotClicked"
+        android:text="2" />
+
+    <Button
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:autoSizeTextType="uniform"
+        android:onClick="numberInputGotClicked"
+        android:text="3" />
+
+    <Button
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:autoSizeTextType="uniform"
+        android:onClick="operatorsClicked"
+        android:text="x" />
+
+    <Button
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:autoSizeTextType="uniform"
+        android:onClick="numberInputGotClicked"
+        android:text="0" />
+
+    <Button
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:autoSizeTextType="uniform"
+        android:onClick="numberInputGotClicked"
+        android:text="." />
+
+    <Button
+        android:layout_rowWeight="1"
+        android:layout_columnSpan="1"
+        android:layout_columnWeight="1"
+        android:autoSizeTextType="uniform"
+        android:onClick="operatorsClicked"
+        android:text="+" />
+
+    <Button
+        android:layout_rowWeight="1"
+        android:layout_columnSpan="1"
+        android:layout_columnWeight="1"
+        android:autoSizeTextType="uniform"
+        android:onClick="operatorsClicked"
+        android:text="-" />
+
+    <Button
+        android:layout_rowWeight="1"
+        android:layout_columnSpan="4"
+        android:layout_columnWeight="1"
+        android:autoSizeTextType="uniform"
+        android:onClick="evaluateButtonGotClicked"
+        android:text="=" />
+
+
+</GridLayout>
