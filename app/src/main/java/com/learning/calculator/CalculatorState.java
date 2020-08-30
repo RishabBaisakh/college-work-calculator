@@ -5,6 +5,10 @@ public class CalculatorState {
     private Boolean operandTwoPresent;
     private Boolean operatorPresent;
 
+    public CalculatorState(){
+        resetState(false, false, false);
+    }
+
     public Boolean canCalculate() {
         return getOperandOnePresent() && getOperandTwoPresent() && getOperatorPresent();
     }
