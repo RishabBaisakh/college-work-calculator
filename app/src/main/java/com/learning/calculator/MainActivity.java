@@ -2,7 +2,6 @@ package com.learning.calculator;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -15,13 +14,17 @@ public class MainActivity extends AppCompatActivity implements DialogInterface {
     TextView displayTextView;
     TextView operationTextView;
     Button clickedButton;
-    InputEvaluator inputEvaluator;
     CalculatorState calculatorState;
     AlertDialog.Builder warningDialogBuilder;
     String stream = "";
     Float operandOne;
     Float operandTwo;
-    MathOperator operator;
+    String operator= "";
+    Float result;
+
+    String operandOneText;
+    String operandTwoText;
+    String operatorText = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -31,35 +34,57 @@ public class MainActivity extends AppCompatActivity implements DialogInterface {
 
         displayTextView = findViewById(R.id.main_displayTextView);
         operationTextView = findViewById(R.id.main_operationTextView);
-        inputEvaluator = new InputEvaluator();
+        calculatorState = new CalculatorState();
     }
 
     public void numberInputGotClicked(View view) {
         clickedButton = (Button) view;
         String inputNumber = clickedButton.getText().toString();
         stream += inputNumber;
-        String tempString;
 
         if(!calculatorState.getOperatorPresent()) {
             operandOne = Float.parseFloat(stream);
-            calculatorState.resetState(true, false, false); // Change this....
+            calculatorState.resetState(true, false, false);
+            this.updateViews(stream);
         } else {
             operandTwo = Float.parseFloat(stream);
-            calculatorState.resetState(true, true, true); // Change this....
+            calculatorState.resetState(true, true, true);
+            this.updateViews(stream);
         }
     }
 
     public void operatorsClicked(View view) {
         clickedButton = (Button) view;
-        String inputOperator = clickedButton.getText().toString();
-        calculatorState = new CalculatorState();
 
-        if (calculatorState.getOperandOnePresent() && !calculatorState.getOperatorPresent()) {
-
-            calculatorState.resetState(true, false, true); // Change this....
+        if (!calculatorState.getOperatorPresent()) {
+            operator = clickedButton.getText().toString();
+            stream = "";
+            calculatorState.resetState(true, false, true);
+            this.updateViews(operator);
         } else
             this.showWarningAlertDialog("Warning!", "Can't perform this operation!");
     }
+
+    public void evaluateButtonGotClicked(View view) {
+        clickedButton = (Button) view;
+
+        if(calculatorState.canCalculate()){
+            this.result = BasicCalculator.calculate(operandOne, operandTwo, operator);
+            this.updateViews(this.result.toString());
+            this.operandOne = this.result;
+            this.operandTwo = null;
+            this.result = null;
+            this.operator = "";
+            calculatorState.resetState(true, false, false);
+        } else
+            this.showWarningAlertDialog("Warning", "Can't evaluate now!");
+    }
+
+    public void resetButtonGotClicked(View view) {
+        displayTextView.setText("0");
+        calculatorState.resetState(false, false, false);
+    }
+
 
     private void showWarningAlertDialog(String warningTitle, String warningMessage){
         warningDialogBuilder = new AlertDialog.Builder(MainActivity.this);
@@ -71,20 +96,13 @@ public class MainActivity extends AppCompatActivity implements DialogInterface {
         warningAlertDialog.show();
     }
 
-    public void resetButtonGotClicked(View view) {
-        displayTextView.setText("0");
-        calculatorState.resetState(false, true, false); // Change this....
-    }
+    private void updateViews(String displayText){
+        operandOneText = (calculatorState.getOperandOnePresent()) ? this.operandOne.toString() : "";
+        operandTwoText = (calculatorState.getOperandTwoPresent()) ? this.operandTwo.toString() : "";
+        operatorText = this.operator;
 
-    public void evaluateButtonGotClicked(View view) {
-        clickedButton = (Button) view;
-
-        if(calculatorState.canCalculate()){
-            // Evaluate the result, and update the screen....
-
-            calculatorState.resetState(true, false, false); // Change this....
-        } else
-            this.showWarningAlertDialog("Warning", "Can't evaluate now!");
+        displayTextView.setText(displayText);
+        operationTextView.setText(operandOneText + operatorText + operandTwoText);
     }
 
     @Override

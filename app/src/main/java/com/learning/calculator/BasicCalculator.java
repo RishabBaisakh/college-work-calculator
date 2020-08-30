@@ -2,15 +2,15 @@ package com.learning.calculator;
 
 public class BasicCalculator {
 
-    public Float calculate(Float operandOne, Float operandTwo, MathOperator operator){
+    public static Float calculate(Float operandOne, Float operandTwo, String operator){
         switch(operator){
-            case ADD:
+            case "+":
                 return operandOne + operandTwo;
-            case SUBTRACT:
+            case "-":
                 return operandOne - operandTwo;
-            case MULTIPLY:
+            case "x":
                 return operandOne * operandTwo;
-            case DIVIDE:
+            case "÷":
                 return operandOne / operandTwo;
         }
 
