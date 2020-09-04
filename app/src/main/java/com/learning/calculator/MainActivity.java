@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface {
     String stream = "";
     Float operandOne;
     Float operandTwo;
-    String operator= "";
+    String operator = "";
     Float result;
 
     String operandOneText;
@@ -27,8 +27,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface {
     String operatorText = "";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -42,15 +41,14 @@ public class MainActivity extends AppCompatActivity implements DialogInterface {
         String inputNumber = clickedButton.getText().toString();
         stream += inputNumber;
 
-        if(!calculatorState.getOperatorPresent()) {
+        if (!calculatorState.getOperatorPresent()) {
             operandOne = Float.parseFloat(stream);
             calculatorState.resetState(true, false, false);
-            this.updateViews(stream);
         } else {
             operandTwo = Float.parseFloat(stream);
             calculatorState.resetState(true, true, true);
-            this.updateViews(stream);
         }
+        this.updateViews(stream);
     }
 
     public void operatorsClicked(View view) {
@@ -68,8 +66,9 @@ public class MainActivity extends AppCompatActivity implements DialogInterface {
     public void evaluateButtonGotClicked(View view) {
         clickedButton = (Button) view;
 
-        if(calculatorState.canCalculate()){
+        if (calculatorState.canCalculate()) {
             this.result = BasicCalculator.calculate(operandOne, operandTwo, operator);
+            assert this.result != null;
             this.updateViews(this.result.toString());
             this.operandOne = this.result;
             this.operandTwo = null;
@@ -86,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface {
     }
 
 
-    private void showWarningAlertDialog(String warningTitle, String warningMessage){
+    private void showWarningAlertDialog(String warningTitle, String warningMessage) {
         warningDialogBuilder = new AlertDialog.Builder(MainActivity.this);
         warningDialogBuilder.setTitle(warningTitle)
                 .setMessage(warningMessage)
@@ -96,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface {
         warningAlertDialog.show();
     }
 
-    private void updateViews(String displayText){
+    private void updateViews(String displayText) {
         operandOneText = (calculatorState.getOperandOnePresent()) ? this.operandOne.toString() : "";
         operandTwoText = (calculatorState.getOperandTwoPresent()) ? this.operandTwo.toString() : "";
         operatorText = this.operator;
